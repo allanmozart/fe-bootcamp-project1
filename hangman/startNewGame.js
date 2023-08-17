@@ -1,9 +1,7 @@
-
-
+const { input, rawlist, select } = require("@inquirer/prompts");
 
 function startNewGame() {
-
-
+    console.log("Aqui")
     select({
         message: "Select a game type",
         choices: [
@@ -60,3 +58,6 @@ function startNewGame() {
     });
 
 }
+
+
+module.exports = {startNewGame};
