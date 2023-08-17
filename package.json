@@ -4,7 +4,8 @@
     "main": "bin/index.js",
     "description": "",
     "scripts": {
-        "start": "nodemon hangman/index.js"
+        "start:index": "nodemon hangman/index.js",
+        "start:newGame": "nodemon hangman/startNewGame.js"
 
     },
     "dependencies": {

@@ -1,4 +1,5 @@
 const { input, rawlist, select } = require("@inquirer/prompts");
+const start = require('../hangman/startNewGame')
 
 console.log("main index");
 
@@ -29,7 +30,7 @@ function mainMenu() {
   }).then(function(option){
     switch(option){
         case "new":
-            startGame();
+          startGame();
             break;
         case "save":
             saveGame();
