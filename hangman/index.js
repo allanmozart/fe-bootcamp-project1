@@ -1,7 +1,7 @@
 const { input, rawlist, select } = require("@inquirer/prompts");
-const start = require('../hangman/startNewGame')
+const {startNewGame} = require('../hangman/startNewGame')
 
-console.log("main index");
+//console.log(start);
 
 //step 1
 
@@ -30,7 +30,7 @@ function mainMenu() {
   }).then(function(option){
     switch(option){
         case "new":
-          startGame();
+          startNewGame();
             break;
         case "save":
             saveGame();
@@ -46,6 +46,10 @@ function mainMenu() {
 
 mainMenu();
 
+
+module.exports = { mainMenu };
+
+/*
 function startGame(){
     select({
         message: "Select the game type",
@@ -61,3 +65,4 @@ function startGame(){
         ],
       }) 
 }
+*/

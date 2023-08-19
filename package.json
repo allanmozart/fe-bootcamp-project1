@@ -4,9 +4,7 @@
     "main": "bin/index.js",
     "description": "",
     "scripts": {
-        "start:index": "nodemon hangman/index.js",
-        "start:newGame": "nodemon hangman/startNewGame.js"
-
+        "start": "nodemon hangman/index.js"
     },
     "dependencies": {
         "@inquirer/prompts": "^3.0.2",
