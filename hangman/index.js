@@ -1,22 +1,8 @@
 const { input, rawlist, select } = require("@inquirer/prompts");
 const {startNewGame} = require('../hangman/startNewGame')
+const { setWordByDifficult }  = require("../hangman/templates/setWord.js");
 
 //console.log(start);
-
-//step 1
-
-//Main menu
-//start new game
-//Select game type
-    //Player vs Player
-        //Select difficulty level
-            //Levels (ex: easy, medium and high)
-    //Player vs Computer
-        //Select difficulty level
-        //Levels (ex: easy, medium and high)
-//Save game
-//Load game
-//exit
 
 function mainMenu() {
   rawlist({
@@ -63,6 +49,31 @@ function startGame(){
             value: "playerpc",
           },
         ],
-      }) 
+      }).then(function(option) {
+        if(option == "playerpc") {
+          rawlist({
+            message: "Choose your difficult level",
+            choices: [
+              { name: "easy", value: "easy" },
+              { name: "medium", value: "medium" },
+              { name: "hard", value: "hard" },
+            ],
+          }).then(function (option) {
+            switch (option) {
+              case "easy":
+                setWordByDifficult(0);
+                break;
+              case "medium":
+                setWordByDifficult(1);
+                break;
+              case "hard":
+                setWordByDifficult(2);
+                break;
+            }
+          });
+        } else {
+          console.log("I'm on error");
+        }
+      });
 }
 */
