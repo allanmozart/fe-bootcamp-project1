@@ -44,7 +44,7 @@ function startNewGame() {
               value: "Hard",
             },
           ],
-        }).then(function (x) {
+        }).then(function(x) {
           //resultado da escolha Player vs Computer - Guardar para load Game
         }),
       },
