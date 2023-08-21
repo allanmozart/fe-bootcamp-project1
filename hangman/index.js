@@ -4,6 +4,7 @@ const {startNewGame} = require('../hangman/startNewGame')
 //console.log(start);
 
 function mainMenu() {
+  const {loadAGame} = require("./templates/loadGame")
   rawlist({
     message: "The Hangman game!!!!",
     choices: [
@@ -18,10 +19,11 @@ function mainMenu() {
           startNewGame();
             break;
         case "save":
-            saveGame();
+            console.log("Game saved!!!");
+            mainMenu();
             break;
         case "load":
-            loadGame();
+            loadAGame();
             break;
         default:
             console.log("Select a valid option");
@@ -33,46 +35,3 @@ mainMenu();
 
 
 module.exports = { mainMenu };
-
-/*
-function startGame(){
-    select({
-        message: "Select the game type",
-        choices: [
-          {
-            name: "Player Vs Player",
-            value: "player",
-          },
-          {
-            name: "Player Vs PC",
-            value: "playerpc",
-          },
-        ],
-      }).then(function(option) {
-        if(option == "playerpc") {
-          rawlist({
-            message: "Choose your difficult level",
-            choices: [
-              { name: "easy", value: "easy" },
-              { name: "medium", value: "medium" },
-              { name: "hard", value: "hard" },
-            ],
-          }).then(function (option) {
-            switch (option) {
-              case "easy":
-                setWordByDifficult(0);
-                break;
-              case "medium":
-                setWordByDifficult(1);
-                break;
-              case "hard":
-                setWordByDifficult(2);
-                break;
-            }
-          });
-        } else {
-          console.log("I'm on error");
-        }
-      });
-}
-*/

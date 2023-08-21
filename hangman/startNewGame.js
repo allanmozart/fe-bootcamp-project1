@@ -57,6 +57,7 @@ function playerVsPlayer() {
 }
 
 function playerVsComputer() {
+  const { startGamePlayerPc} = require('../hangman/templates/setWord.js');
   select({
     message: "Select a difficulty level",
     choices: [
@@ -74,33 +75,41 @@ function playerVsComputer() {
       },
     ],
   }).then(function(option) {
-    runDifficult(option);
+    switch(option) {
+      case "Easy":
+        difficult=0;
+        startGamePlayerPc();
+          break;
+      case "Medium":
+        difficult=1;
+        startGamePlayerPc();
+        break;
+      case "Hard":
+        difficult=2;
+        startGamePlayerPc();
+        break;
+  }
   });
 }
 
-function runDifficult(option) {
+/* function runDifficult(option) {
   const { startGamePlayerPc} = require('../hangman/templates/setWord.js');
     let guessLetterInput
     switch(option) {
         case "Easy":
           difficult=0;
           startGamePlayerPc();
-           /*  failedAttemp(currentAttempt);
-            setWordByDifficult(0);
-            guessLetterInput = input({
-                message: 'Guess a letter:'
-            }).then(
-                guessLetter(guessLetterInput),
-                ) */
             break;
         case "Medium":
-          setWordByDifficult(1);
+          difficult=1;
+          startGamePlayerPc();
           break;
         case "Hard":
-          setWordByDifficult(2);
+          difficult=2;
+          startGamePlayerPc();
           break;
     }
 }
-
+ */
 
 module.exports = { startNewGame, difficult };
