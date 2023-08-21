@@ -1,6 +1,5 @@
 const { input, rawlist, select } = require("@inquirer/prompts");
 const {startNewGame} = require('../hangman/startNewGame')
-const { setWordByDifficult }  = require("../hangman/templates/setWord.js");
 
 //console.log(start);
 

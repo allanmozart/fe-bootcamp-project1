@@ -84,7 +84,7 @@ let atual = [];
 
 //let attemps = 4;
 
-let attemp = function (attemps) {
+function failedAttemp(attemps) {
   if (attemps === 0) {
     console.log(hangmanEmpty);
     atual = hangmanEmpty;
@@ -115,4 +115,4 @@ let attemp = function (attemps) {
 
 //console.log(atual)
 
-module.export = { atual };
+module.exports = { atual, failedAttemp };
