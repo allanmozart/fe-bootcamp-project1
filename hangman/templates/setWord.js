@@ -51,6 +51,7 @@ function checkWin() {
 }
 
 function askForLetter() {
+    const { mainMenu } = require("../index");
   const answer = input({
     message: "Guess a letter:",
   }).then((answer) => {
