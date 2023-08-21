@@ -1,11 +1,7 @@
 const { rawlist, select, input } = require("@inquirer/prompts");
 const { mainMenu } = require("../hangman/index");
-const { failedAttemp, atual } = require("../hangman/hangmanDraw");
-//const { setWordByDifficult, guessLetter } = require('../hangman/templates/setWord.js');
-
-//let currentAttempt = 0;
-//const maxAttempts = 6;
-let difficult=0;
+const { startGame } = require("../hangman/templates/setWord.js");
+const { secretWord } = require("./secretWord");
 
 function startNewGame() {
   rawlist({
@@ -32,32 +28,14 @@ function startNewGame() {
   });
 }
 
-function playerVsPlayer() {
-  select({
-    message: "Select a difficulty level",
-    choices: [
-      {
-        name: "Easy",
-        value: "Easy",
-      },
-      {
-        name: "Medium",
-        value: "Medium",
-      },
-      {
-        name: "Hard",
-        value: "Hard",
-      },
-    ],
-  }).then(function (difficulty) {
-    //é chamada a função que mostra o numero de caracteres segundo a dificuldade
-
-    console.log("Para breve...");
+async function playerVsPlayer() {
+  const answer = await input({
+    message: "Introduce the word to guess:",
   });
+  startGame(answer);
 }
 
 function playerVsComputer() {
-  const { startGamePlayerPc} = require('../hangman/templates/setWord.js');
   select({
     message: "Select a difficulty level",
     choices: [
@@ -74,42 +52,11 @@ function playerVsComputer() {
         value: "Hard",
       },
     ],
-  }).then(function(option) {
-    switch(option) {
-      case "Easy":
-        difficult=0;
-        startGamePlayerPc();
-          break;
-      case "Medium":
-        difficult=1;
-        startGamePlayerPc();
-        break;
-      case "Hard":
-        difficult=2;
-        startGamePlayerPc();
-        break;
-  }
+  }).then(function (option) {
+    const secret = secretWord(option);
+    startGame(secret);
   });
 }
 
-/* function runDifficult(option) {
-  const { startGamePlayerPc} = require('../hangman/templates/setWord.js');
-    let guessLetterInput
-    switch(option) {
-        case "Easy":
-          difficult=0;
-          startGamePlayerPc();
-            break;
-        case "Medium":
-          difficult=1;
-          startGamePlayerPc();
-          break;
-        case "Hard":
-          difficult=2;
-          startGamePlayerPc();
-          break;
-    }
-}
- */
 
-module.exports = { startNewGame, difficult };
+module.exports = { startNewGame };

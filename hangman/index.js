@@ -1,7 +1,6 @@
-const { input, rawlist, select } = require("@inquirer/prompts");
+const {rawlist} = require("@inquirer/prompts");
 const {startNewGame} = require('../hangman/startNewGame')
 
-//console.log(start);
 
 function mainMenu() {
   const {loadAGame} = require("./templates/loadGame")

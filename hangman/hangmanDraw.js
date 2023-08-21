@@ -82,39 +82,38 @@ let hangmanRightLeg = [
 
 
 let hangDraw = [];
-//let attemps = 4;
 
-function failedAttemp() {
-  const {currentAttempt} = require("./templates/setWord");
-  let attemps=currentAttempt;
-  if (attemps === 0) {
+
+function failedAttemp(hangDraw) {
+
+  if (hangDraw === 6) {
     console.log(hangmanEmpty);
-    hangDraw = [
-      [" ____   "],
-      ["|    |  "],
-      ["|       "],
-      ["|       "],
-      ["|       "],
-      ["|_______"],
-    ];
-  } else if (attemps === 1) {
+    hangDraw = hangmanEmpty
+    return hangDraw;
+  } else if (hangDraw === 5) {
     console.log(hangmanHead);
     hangDraw = hangmanHead;
-  } else if (attemps === 2) {
+    return hangDraw;
+  } else if (hangDraw === 4) {
     console.log(hangmanLeftArm);
     hangDraw = hangmanLeftArm;
-  } else if (attemps === 3) {
+    return hangDraw;
+  } else if (hangDraw === 3) {
     console.log(hangmanTorso);
     hangDraw = hangmanTorso;
-  } else if (attemps === 4) {
+    return hangDraw;
+  } else if (hangDraw === 2) {
     console.log(hangmanRightArm);
     hangDraw = hangmanRightArm;
-  } else if (attemps === 5) {
+    return hangDraw;
+  } else if (hangDraw === 1) {
     console.log(hangmanLeftLeg);
     hangDraw = hangmanLeftLeg;
-  } else if (attemps === 6) {
+    return hangDraw;
+  } else if (hangDraw === 0) {
     console.log(hangmanRightLeg);
     hangDraw = hangmanRightLeg;
+    return hangDraw;
   }
 
 }
