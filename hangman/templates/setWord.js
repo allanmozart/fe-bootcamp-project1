@@ -10,7 +10,7 @@ let wordsByDifficult = {
 let level = difficult;
 let randomWord = "";
 let guessedLetters = [];
-let currentAttempt
+let currentAttempt;
 const maxAttempts = 6;
 
 /* function setWordByDifficult(difficulty = 0) {
@@ -90,9 +90,28 @@ function guessLetter(letter, currentAttempt){
 
 function checkWin(){
     if(guessedLetters.includes(hidenWord)){
-
     }
+}
+function guessLetter(letter, currentAttempt) {
+  if (!hidenWord.includes(letter)) {
+    guessedLetters.push(letter);
+    console.log(hidenWord);
+    if (!randomWord.includes(letter)) {
+      console.log("You missed ");
+      currentAttempt++;
+      failedAttemp(currentAttempt);
+    }
+    hideWord(); 
+    letterInput();
+  } else {
+    console.log("You already guessed that letter.");
+    letterInput();
+  }
+}
+
+function checkWin() {
+  if (guessedLetters.includes(hidenWord)) {
+  }
 }
 
 module.exports = {startGamePlayerPc, hideWord, guessLetter }
-
