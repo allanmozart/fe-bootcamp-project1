@@ -1,11 +1,11 @@
 const { rawlist, select, input } = require("@inquirer/prompts");
 const { mainMenu } = require("../hangman/index");
 const { failedAttemp, atual } = require("../hangman/hangmanDraw");
-const { setWordByDifficult, guessLetter } = require('../hangman/templates/setWord.js');
+//const { setWordByDifficult, guessLetter } = require('../hangman/templates/setWord.js');
 
-let currentAttempt = 0;
-const maxAttempts = 6;
-
+//let currentAttempt = 0;
+//const maxAttempts = 6;
+let difficult=0;
 
 function startNewGame() {
   rawlist({
@@ -79,16 +79,19 @@ function playerVsComputer() {
 }
 
 function runDifficult(option) {
+  const { startGamePlayerPc} = require('../hangman/templates/setWord.js');
     let guessLetterInput
     switch(option) {
         case "Easy":
-            failedAttemp(currentAttempt);
+          difficult=0;
+          startGamePlayerPc();
+           /*  failedAttemp(currentAttempt);
             setWordByDifficult(0);
             guessLetterInput = input({
                 message: 'Guess a letter:'
             }).then(
                 guessLetter(guessLetterInput),
-                )
+                ) */
             break;
         case "Medium":
           setWordByDifficult(1);
@@ -100,4 +103,4 @@ function runDifficult(option) {
 }
 
 
-module.exports = { startNewGame };
+module.exports = { startNewGame, difficult };
