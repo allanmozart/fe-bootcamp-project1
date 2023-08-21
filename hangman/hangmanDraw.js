@@ -80,32 +80,41 @@ let hangmanRightLeg = [
   ["|________"],
 ];
 
-let atual = [];
 
+let hangDraw = [];
 //let attemps = 4;
 
-function failedAttemp(attemps) {
+function failedAttemp() {
+  const {currentAttempt} = require("./templates/setWord");
+  let attemps=currentAttempt;
   if (attemps === 0) {
     console.log(hangmanEmpty);
-    atual = hangmanEmpty;
+    hangDraw = [
+      [" ____   "],
+      ["|    |  "],
+      ["|       "],
+      ["|       "],
+      ["|       "],
+      ["|_______"],
+    ];
   } else if (attemps === 1) {
     console.log(hangmanHead);
-    atual = hangmanHead;
+    hangDraw = hangmanHead;
   } else if (attemps === 2) {
     console.log(hangmanLeftArm);
-    atual = hangmanLeftArm;
+    hangDraw = hangmanLeftArm;
   } else if (attemps === 3) {
     console.log(hangmanTorso);
-    atual = hangmanTorso;
+    hangDraw = hangmanTorso;
   } else if (attemps === 4) {
     console.log(hangmanRightArm);
-    atual = hangmanRightArm;
+    hangDraw = hangmanRightArm;
   } else if (attemps === 5) {
     console.log(hangmanLeftLeg);
-    atual = hangmanLeftLeg;
+    hangDraw = hangmanLeftLeg;
   } else if (attemps === 6) {
     console.log(hangmanRightLeg);
-    atual = hangmanRightLeg;
+    hangDraw = hangmanRightLeg;
   }
 
 }
@@ -115,4 +124,4 @@ function failedAttemp(attemps) {
 
 //console.log(atual)
 
-module.exports = { atual, failedAttemp };
+module.exports = {failedAttemp,hangDraw};

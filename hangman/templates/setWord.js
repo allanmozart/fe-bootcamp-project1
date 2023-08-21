@@ -1,6 +1,8 @@
 const { input } = require("@inquirer/prompts");
 const { failedAttemp, atual } = require("../hangmanDraw");
 const { difficult } = require("../startNewGame");
+
+
 let wordsByDifficult = {
   easy: ["apple", "grape", "papaya"],
   medium: ["monitor", "mouse", "keyboard"],
@@ -10,10 +12,12 @@ let wordsByDifficult = {
 let level = difficult;
 let randomWord = "";
 let guessedLetters = [];
-let currentAttempt;
-const maxAttempts = 6;
+let currentAttempt=0;
+const maxAttempts = 0;
 
 function startGamePlayerPc() {
+const save = require("./save")
+
   if (level == 0) {
     randomWord =
       wordsByDifficult.easy[
@@ -28,14 +32,17 @@ function startGamePlayerPc() {
     randomWord =
       wordsByDifficult.hard[
         Math.floor(Math.random() * wordsByDifficult.hard.length)
-      ];
+      ]
   }
-
   guessedLetters = [];
-  console.log("Aqui");
+  currentAttempt=maxAttempts;
+  console.log("Guess the word by guessing one letter at a time!\n");
+  console.log("Wtite back to go to main menu.\n");
 
   hideWord();
+  updateGuessesDisplay()
   askForLetter();
+  save.saveGame(guessedLetters, currentAttempt, randomWord);
 }
 
 function hideWord() {
@@ -45,6 +52,15 @@ function hideWord() {
     .join(" ");
   console.log(hidenWord);
 }
+
+function updateGuessesDisplay() {
+    const {hangDraw}= require("../hangmanDraw")
+    const save = require("./save");
+    console.log(hangDraw);
+    console.log(`Current Attempt: ${currentAttempt}`);
+    console.log(`Guessed letters: ${guessedLetters.join(", ")}`);
+    save.saveGame(guessedLetters, currentAttempt, randomWord);
+  }
 
 function askForLetter() {
   const { mainMenu } = require("../index");
@@ -65,25 +81,38 @@ function askForLetter() {
   });
 }
 
-function guessLetter(letter, currentAttempt) {
+function guessLetter(letter) {
   if (!guessedLetters.includes(letter)) {
     guessedLetters.push(letter);
+
     if (!randomWord.includes(letter)) {
       console.log("You missed ");
       currentAttempt++;
-      console.log(failedAttemp(currentAttempt)); //not working yet
+      //console.log(failedAttemp(currentAttempt)); //not working yet
     }
     hideWord();
+    updateGuessesDisplay();
     askForLetter();
   } else {
     console.log("You already guessed that letter.");
     askForLetter();
+    
   }
 }
 
 function checkWin() {
-  if (guessedLetters.includes(hidenWord)) {
-  }
-}
+    if (
+        randomWord.split("").every((letter) => guessedLetters.includes(letter))
+      ) {
+        console.log("\nCongratulations! You won!");
+        process.exit(); // Terminate the process
+      } else if (currentAttempt === 6) {
+        console.log(`\nGame over! The word was "${currentWord}". Try again!`);
+        process.exit(); // Terminate the process
+      } else {
+    
+        askForLetter();
+      }
+    }
 
-module.exports = { startGamePlayerPc, hideWord, guessLetter };
+module.exports = { startGamePlayerPc, hideWord, guessLetter,currentAttempt};
