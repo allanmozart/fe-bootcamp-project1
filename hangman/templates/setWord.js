@@ -1,5 +1,6 @@
 const { input } = require("@inquirer/prompts");
 const save = require("./save");
+const { mainMenu} = require("../index");
 const { failedAttemp } = require("../hangmanDraw");
 
 let randomWord = "";
@@ -40,18 +41,16 @@ failedAttemp(currentAttempt);
 function checkWin() {
   if (randomWord.split("").every((letter) => guessedLetters.includes(letter))) {
     console.log("\nCongratulations! You won!");
-    process.exit(); // Terminate the process
+   mainMenu();
   } else if (currentAttempt === 0) {
     console.log(`\nGame over! The word was "${randomWord}". Try again!`);
-    process.exit(); // Terminate the process
+    mainMenu(); // Terminate the process
   } else {
     askForLetter();
   }
 }
 
 function askForLetter() {
-  const { mainMenu } = require("../index");
-
   const answer = input({
     message: "Guess a letter:",
   }).then((answer) => {
