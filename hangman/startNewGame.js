@@ -1,7 +1,7 @@
 const { rawlist, select, input } = require("@inquirer/prompts");
 const { mainMenu } = require("../hangman/index");
 const { failedAttemp, atual } = require("../hangman/hangmanDraw");
-const { setWordByDifficult, guessLetter } = require('../hangman/templates/setWord.js');
+const { setWordByDifficult, guessLetter, letterInput } = require('../hangman/templates/setWord.js');
 
 let currentAttempt = 0;
 const maxAttempts = 6;
@@ -84,11 +84,7 @@ function runDifficult(option) {
         case "Easy":
             failedAttemp(currentAttempt);
             setWordByDifficult(0);
-            guessLetterInput = input({
-                message: 'Guess a letter:'
-            }).then(
-                guessLetter(guessLetterInput),
-                )
+            letterInput();
             break;
         case "Medium":
           setWordByDifficult(1);
