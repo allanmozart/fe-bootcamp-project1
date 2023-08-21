@@ -13,44 +13,42 @@ let guessedLetters = [];
 let currentAttempt;
 const maxAttempts = 6;
 
-/* function setWordByDifficult(difficulty = 0) {
-    level = difficulty
-    if(level == 0) {
-        randomWord = wordsByDifficult.easy[Math.floor(Math.random() * wordsByDifficult.easy.length)]
-    } else if( level == 1) {
-        randomWord = wordsByDifficult.medium[Math.floor(Math.random() * wordsByDifficult.medium.length)]
-    } else if( level == 2) {
-        randomWord = wordsByDifficult.hard[Math.floor(Math.random() * wordsByDifficult.hard.length)]
-    }
+function startGamePlayerPc() {
+  if (level == 0) {
+    randomWord =
+      wordsByDifficult.easy[
+        Math.floor(Math.random() * wordsByDifficult.easy.length)
+      ];
+  } else if (level == 1) {
+    randomWord =
+      wordsByDifficult.medium[
+        Math.floor(Math.random() * wordsByDifficult.medium.length)
+      ];
+  } else if (level == 2) {
+    randomWord =
+      wordsByDifficult.hard[
+        Math.floor(Math.random() * wordsByDifficult.hard.length)
+      ];
+  }
+
+  guessedLetters = [];
+  console.log("Aqui");
+
+  hideWord();
+  askForLetter();
 }
- */
-function startGamePlayerPc(){
-    console.log(level);
-    if(level == 0) {
-        randomWord = wordsByDifficult.easy[Math.floor(Math.random() * wordsByDifficult.easy.length)]
-    } else if( level == 1) {
-        randomWord = wordsByDifficult.medium[Math.floor(Math.random() * wordsByDifficult.medium.length)]
-    } else if( level == 2) {
-        randomWord = wordsByDifficult.hard[Math.floor(Math.random() * wordsByDifficult.hard.length)]
-    }
-
-    guessedLetters = [];
-    console.log('Aqui');
-
-    hideWord();
-    askForLetter()
-}
-
 
 function hideWord() {
-   const hidenWord = randomWord.split("").map(letter => (guessedLetters.includes(letter) ? letter : "_")).join(" ");
-    console.log(hidenWord);
+  const hidenWord = randomWord
+    .split("")
+    .map((letter) => (guessedLetters.includes(letter) ? letter : "_"))
+    .join(" ");
+  console.log(hidenWord);
 }
 
-
 function askForLetter() {
-    const { mainMenu } = require("../index");
-    
+  const { mainMenu } = require("../index");
+
   const answer = input({
     message: "Guess a letter:",
   }).then((answer) => {
@@ -58,54 +56,28 @@ function askForLetter() {
     const cleanedLetter = letter.toLowerCase().trim();
     if (/^[a-z]$/.test(cleanedLetter)) {
       guessLetter(cleanedLetter);
-    }else if(cleanedLetter ==="back"){
-        mainMenu();
-    }
-     else {
+    } else if (cleanedLetter === "back") {
+      mainMenu();
+    } else {
       console.log("Please enter a valid single letter.");
       askForLetter();
     }
-  })
-
+  });
 }
 
-function guessLetter(letter, currentAttempt){
-    if(!guessedLetters.includes(letter)){
-        guessedLetters.push(letter);
-     if(!randomWord.includes(letter)){
-        console.log("You missed ");
-        currentAttempt++
-        failedAttemp(currentAttempt);
-    }
-    hideWord();
-    askForLetter()
-
-    }   else {
-        console.log("You already guessed that letter.");
-        askForLetter();
-    }
-
-
-}
-
-function checkWin(){
-    if(guessedLetters.includes(hidenWord)){
-    }
-}
 function guessLetter(letter, currentAttempt) {
-  if (!hidenWord.includes(letter)) {
+  if (!guessedLetters.includes(letter)) {
     guessedLetters.push(letter);
-    console.log(hidenWord);
     if (!randomWord.includes(letter)) {
       console.log("You missed ");
       currentAttempt++;
-      failedAttemp(currentAttempt);
+      console.log(failedAttemp(currentAttempt)); //not working yet
     }
-    hideWord(); 
-    letterInput();
+    hideWord();
+    askForLetter();
   } else {
     console.log("You already guessed that letter.");
-    letterInput();
+    askForLetter();
   }
 }
 
@@ -114,4 +86,4 @@ function checkWin() {
   }
 }
 
-module.exports = {startGamePlayerPc, hideWord, guessLetter }
+module.exports = { startGamePlayerPc, hideWord, guessLetter };
