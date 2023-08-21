@@ -1,7 +1,7 @@
 let wordsByDifficult = {
     easy: ["apple", "grape", "papaya"],
     medium: ["monitor", "mouse", "keyboard"],
-    hard: ["bootcamp"],
+    hard: ["bootcamp", "minderacraft", "development"],
   };
   
 
