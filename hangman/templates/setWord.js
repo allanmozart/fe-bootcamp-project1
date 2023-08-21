@@ -1,6 +1,6 @@
 const { input } = require("@inquirer/prompts");
 const save = require("./save");
-const { mainMenu} = require("../index");
+const { mainMenu } = require("../index");
 const { failedAttemp } = require("../hangmanDraw");
 
 let randomWord = "";
@@ -39,6 +39,7 @@ failedAttemp(currentAttempt);
 }
 
 function checkWin() {
+    const { mainMenu } = require("../index");
   if (randomWord.split("").every((letter) => guessedLetters.includes(letter))) {
     console.log("\nCongratulations! You won!");
    mainMenu();
